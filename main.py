@@ -8,12 +8,15 @@ def start_game(board):
         if user_input:
             x,y = controller.num_to_cord(board, user_input)
             if controller.check_input_valid(board, x, y):
-                board[x][y].setContent('X')
+                controller.setContent(board, x, y, 'X')
                 if controller.check_winner(board, 'X'):
                     break
-                controller.bot_move(board)
-                controller.print_board(board)
-                if controller.check_winner(board, 'O'):
+                if controller.bot_move(board):
+                    controller.print_board(board)
+                    if controller.check_winner(board, 'O'):
+                        break
+                else:
+                    print('No more moves available. No winners!')
                     break
             else:
                 print('Invalid Input: Try again')

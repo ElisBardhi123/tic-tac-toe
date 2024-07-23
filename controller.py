@@ -57,9 +57,12 @@ def get_valid_moves(board):
 
 def bot_move(board):
     valid_moves = get_valid_moves(board)
+    if valid_moves == []:
+        return False
     random_move = random.choice(valid_moves)
     x,y = num_to_cord(board, random_move)
-    board[x][y].setContent('O')
+    setContent(board, x, y, 'O')
+    return True
 
 
 def print_board(board):
@@ -67,3 +70,6 @@ def print_board(board):
         edited_row = '|'.join(list(map(str, row)))
         print(edited_row)
         print('_' * len(edited_row))
+
+def setContent(board, x, y, content):
+    board[x][y].content = content
